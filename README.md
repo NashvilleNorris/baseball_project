@@ -167,6 +167,7 @@ USING(playerid)
 WHERE yearid = 2016 AND hr >= 1)
 
 ,
+
 career_bests AS (
 
 SELECT playerid, MAX(hr) AS hr
