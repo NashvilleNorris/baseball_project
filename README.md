@@ -1,6 +1,6 @@
 ﻿## Lahman Baseball Database Exercise
 - This data has been made available [online](http://www.seanlahman.com/baseball-archive/statistics/) by Sean Lahman
-- A data dictionary is included with the files for this project.
+- A data dictionary is included with the files for this project
 
 		--What range of years for baseball games played does the provided database cover? 
 SELECT MIN(yearid) AS earliest_year, MAX(yearid) AS latest_year
