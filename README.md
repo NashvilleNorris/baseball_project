@@ -9,7 +9,8 @@ FROM appearances
 		
 		--1871 to 2016
 
-		--Find the name and height of the shortest player in the database. How many games did he play in? What is the name of the team for which he played?
+		
+  		--Find the name and height of the shortest player in the database. How many games did he play in? What is the name of the team for which he played?
 SELECT namefirst AS first_name, namelast AS last_name, height
 
 FROM people
@@ -18,7 +19,8 @@ ORDER BY height
 		
 		--Eddie Gaedel at 43 units  
 
-		--How many games did he play in?
+		
+  		--How many games did he play in?
 SELECT p.namefirst AS first_name, p.namelast AS last_name, a.G_all AS total_games_played
 
 FROM people AS p
@@ -28,7 +30,8 @@ INNER JOIN appearances AS a
 ON p.playerid = a.playerid
 
 WHERE p.namelast = 'Gaedel'
-		-- 1 game
+		
+  		-- 1 game
 
 --Find all players in the database who played at Vanderbilt University. Create a list showing each player’s first and last names as well as the total salary they earned in the major leagues. Sort this list in descending order by the total salary earned. Which Vanderbilt player earned the most money in the majors?
 	
