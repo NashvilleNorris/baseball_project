@@ -2,15 +2,9 @@
 - this data has been made available [online](http://www.seanlahman.com/baseball-archive/statistics/) by Sean Lahman
 - A data dictionary is included with the files for this project.
 
-**Directions:**  
-* Within your repository, create a directory named "scripts" which will hold your scripts.
-* Create a new branch for each question. Name these branches using the question number and your initials. For example, Johnny Cash would name his branch for question 3 as question_3_jc. On each branch, you'll create a script to hold your answer. By the end of the project, each student should have ten scripts, one for each of the ten initial questions.  
-* On Saturday morning, you should be prepared to discuss your answers to each question. Each group will review the ten initial questions and merge answers to the main branch. Merging can only take place after the group has reviewed and agreed that the script is correct. After the review session, each group should have a script for each question on the main branch. Each student needs to merge at least two of their answers to the main branch. 
-* Each student should choose one of the open-ended questions or come up with their own and use the database to investigate. At the end of class on Thursday, July 6, each student will give a 5 minute presentation of their findings. For the open-ended portion, pull data from the database, import it into Excel, and use Excel to create visuals.
-
 **Initial Questions**
 
-1. What range of years for baseball games played does the provided database cover? 
+		1. What range of years for baseball games played does the provided database cover? 
 SELECT MIN(yearid) AS earliest_year, MAX(yearid) AS latest_year
 FROM appearances
 --1871 to 2016
@@ -53,15 +47,3 @@ WHERE p.namelast = 'Gaedel'
 
 10. Find all players who hit their career highest number of home runs in 2016. Consider only players who have played in the league for at least 10 years, and who hit at least one home run in 2016. Report the players' first and last names and the number of home runs they hit in 2016.
 
-
-**Open-ended questions**
-
-11. Is there any correlation between number of wins and team salary? Use data from 2000 and later to answer this question. As you do this analysis, keep in mind that salaries across the whole league tend to increase together, so you may want to look on a year-by-year basis.
-
-12. In this question, you will explore the connection between number of wins and attendance.
-  *  Does there appear to be any correlation between attendance at home games and number of wins? </li>
-  *  Do teams that win the world series see a boost in attendance the following year? What about teams that made the playoffs? Making the playoffs means either being a division winner or a wild card winner.
-
-13. It is thought that since left-handed pitchers are more rare, causing batters to face them less often, that they are more effective. Investigate this claim and present evidence to either support or dispute this claim. First, determine just how rare left-handed pitchers are compared with right-handed pitchers. Are left-handed pitchers more likely to win the Cy Young Award? Are they more likely to make it into the hall of fame?
-
-  
