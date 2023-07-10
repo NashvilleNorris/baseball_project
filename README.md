@@ -46,6 +46,7 @@ WHERE p.namelast = 'Gaedel'
 
 		--From 1970 – 2016, what is the largest number of wins for a team that did not win the world series? What is the smallest number of wins for a team that did win the world series? Doing this will probably result in an unusually small number of wins for a world series champion – determine why this is the case. Then redo your query, excluding the problem year. How often from 1970 – 2016 was it the case that a team with the most wins also won the world series? What percentage of the time?
 
+
 SELECT teamid AS team, yearid AS season, MAX(w) AS total_wins
 	--CASE WHEN wswin = 'Y' AND w = 'MAX(wins)' THEN 1
 	--ELSE 0 END AS count_years
@@ -65,122 +66,182 @@ SELECT teamid AS team, yearid AS season, MAX(w) AS total_wins
 		--SEA Mariners in 2001 won 116 games but did not win the WS
 
 		--Doing this will probably result in an unusually small number of wins for a world series champion – determine why this is the case.
+
 SELECT name AS team_name, SUM(w) AS number_of_wins, yearid AS season
+
 FROM teams
+
 WHERE yearid <= 2016
-	AND yearid >= 1970
-	AND wswin = 'Y'
-	AND yearid NOT IN (1981) --this doesn't change the result-------
+	
+ AND yearid >= 1970
+	
+ AND wswin = 'Y'
+	
+ AND yearid NOT IN (1981) --this doesn't change the result-------
+
 GROUP BY name, yearid
+
 ORDER BY number_of_wins ASC
+
 LIMIT 1;
+		
 		--83 wins for the St Louis Cards in 2006; the 81 Dodgers won the WS in a shortened season due to strike
+
 
 		--Using the attendance figures from the homegames table, find the teams and parks which had the top 5 average attendance per game in 2016 (where average attendance is defined as total attendance divided by number of games). Only consider parks where there were at least 10 games played. Report the park name, team name, and average attendance. Repeat for the lowest 5 average attendance.
 		--Find the teams and parks which had the top 5 average attendance per game in 2016. Report the park name, team name, and average attendance.
+
 SELECT park_name, team, SUM(attendance)/SUM(games) AS avg_attendance 
+
 FROM homegames
+
 INNER JOIN parks
+
 USING (park)
+
 WHERE year=2016
+
 AND games >= 10
+
 GROUP BY team, park_name
+
 ORDER BY avg_attendance DESC
+
 LIMIT 5 
 
 		--Repeat for the lowest 5 average attendance. Report the park name, team name, and average attendance.
+
 SELECT park_name, team, SUM(attendance)/SUM(games) AS avg_attendance 
+
 FROM homegames
+
 INNER JOIN parks
+
 USING (park)
+
 WHERE year=2016
+
 AND games >= 10
+
 GROUP BY team, park_name
+
 ORDER BY avg_attendance
+
 LIMIT 5
+
 
 		--Which managers have won the TSN Manager of the Year award in both the National League (NL) and the American League (AL)? Give their full name and the teams that they were managing when they won the award.
 
 WITH full_batting AS (
-	SELECT
-		playerid,
-		yearid,
-		SUM(hr) AS hr
-	FROM batting
-	GROUP BY playerid, yearid
-)
+	
+SELECT playerid, yearid, SUM(hr) AS hr
+	
+FROM batting
+	
+GROUP BY playerid, yearid)
+
 ,
+
 decaders AS (
-	SELECT
-		playerid
-	FROM full_batting
-	GROUP BY playerid
-	HAVING COUNT(*) >= 10
-),
+
+SELECT playerid
+
+FROM full_batting
+
+GROUP BY playerid
+
+HAVING COUNT(*) >= 10)
+
+,
+
 eligible_players AS (
-	SELECT
-		playerid,
-		hr
-	FROM decaders
-	INNER JOIN full_batting
-	USING(playerid)
-	WHERE yearid = 2016 AND hr >= 1
-),
+
+SELECT playerid, hr
+	
+FROM decaders
+
+INNER JOIN full_batting
+
+USING(playerid)
+
+WHERE yearid = 2016 AND hr >= 1)
+
+,
 career_bests AS (
-	SELECT
-		playerid,
-		MAX(hr) AS hr
-	FROM full_batting
-	GROUP BY playerid
-)
-SELECT
-	namefirst || ' ' || namelast AS full_name,
-	hr
+
+SELECT playerid, MAX(hr) AS hr
+	
+FROM full_batting
+
+GROUP BY playerid)
+
+SELECT namefirst || ' ' || namelast AS full_name, hr
+
 FROM eligible_players
+
 JOIN career_bests
+
 USING (playerid, hr)
+
 INNER JOIN people
+
 USING(playerid);
+
 
 		--Find all players who hit their career highest number of home runs in 2016. Consider only players who have played in the league for at least 10 years, and who hit at least one home run in 2016. Report the players' first and last names and the number of home runs they hit in 2016.
 
 WITH full_batting AS (
-	SELECT
-		playerid,
-		yearid,
-		SUM(hr) AS hr
-	FROM batting
-	GROUP BY playerid, yearid
-)
+
+SELECT playerid, yearid, SUM(hr) AS hr
+ 
+FROM batting
+
+GROUP BY playerid, yearid)
+
 ,
+
 decaders AS (
-	SELECT
-		playerid
-	FROM full_batting
-	GROUP BY playerid
-	HAVING COUNT(*) >= 10
-),
+
+SELECT playerid
+
+FROM full_batting
+
+GROUP BY playerid
+
+HAVING COUNT(*) >= 10)
+
+,
+
 eligible_players AS (
-	SELECT
-		playerid,
-		hr
-	FROM decaders
-	INNER JOIN full_batting
-	USING(playerid)
-	WHERE yearid = 2016 AND hr >= 1
-),
+
+SELECT playerid, hr
+
+FROM decaders
+
+INNER JOIN full_batting
+
+USING(playerid)
+
+WHERE yearid = 2016 AND hr >= 1)
+
+,
+
 career_bests AS (
-	SELECT
-		playerid,
-		MAX(hr) AS hr
-	FROM full_batting
-	GROUP BY playerid
-)
-SELECT
-	namefirst || ' ' || namelast AS full_name,
-	hr
+
+SELECT playerid, MAX(hr) AS hr
+	
+FROM full_batting
+
+GROUP BY playerid)
+
+SELECT namefirst || ' ' || namelast AS full_name, hr
+
 FROM eligible_players
+
 JOIN career_bests
+
 USING (playerid, hr)
+
 INNER JOIN people
+
 USING(playerid);
