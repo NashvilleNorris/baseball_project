@@ -10,15 +10,21 @@ FROM appearances
 
 		--Find the name and height of the shortest player in the database. How many games did he play in? What is the name of the team for which he played?
 SELECT namefirst AS first_name, namelast AS last_name, height
+
 FROM people
+
 ORDER BY height 
 		--Eddie Gaedel at 43 units  
 
 		--How many games did he play in?
 SELECT p.namefirst AS first_name, p.namelast AS last_name, a.G_all AS total_games_played
+
 FROM people AS p
+
 INNER JOIN appearances AS a
+
 ON p.playerid = a.playerid
+
 WHERE p.namelast = 'Gaedel'
 		-- 1 game
 
