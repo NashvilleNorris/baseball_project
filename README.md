@@ -1,5 +1,5 @@
 ﻿## Lahman Baseball Database Exercise
-- this data has been made available [online](http://www.seanlahman.com/baseball-archive/statistics/) by Sean Lahman
+- This data has been made available [online](http://www.seanlahman.com/baseball-archive/statistics/) by Sean Lahman
 - A data dictionary is included with the files for this project.
 
 		--What range of years for baseball games played does the provided database cover? 
