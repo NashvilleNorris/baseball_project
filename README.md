@@ -4,6 +4,7 @@
 
 		--What range of years for baseball games played does the provided database cover? 
 SELECT MIN(yearid) AS earliest_year, MAX(yearid) AS latest_year
+
 FROM appearances
 		--1871 to 2016
 
