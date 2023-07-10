@@ -45,15 +45,23 @@ WHERE p.namelast = 'Gaedel'
 	
 
 		--From 1970 – 2016, what is the largest number of wins for a team that did not win the world series? What is the smallest number of wins for a team that did win the world series? Doing this will probably result in an unusually small number of wins for a world series champion – determine why this is the case. Then redo your query, excluding the problem year. How often from 1970 – 2016 was it the case that a team with the most wins also won the world series? What percentage of the time?
+
 SELECT teamid AS team, yearid AS season, MAX(w) AS total_wins
 	--CASE WHEN wswin = 'Y' AND w = 'MAX(wins)' THEN 1
 	--ELSE 0 END AS count_years
-	FROM teams
-	WHERE wswin = 'N'
-	AND yearid BETWEEN 1970 AND 2016
-	GROUP BY yearid, teamid
-	ORDER BY total_wins DESC
-	LIMIT 1
+	
+ FROM teams
+	
+ WHERE wswin = 'N'
+	
+ AND yearid BETWEEN 1970 AND 2016
+	
+ GROUP BY yearid, teamid
+	
+ ORDER BY total_wins DESC
+	
+ LIMIT 1
+ 
 		--SEA Mariners in 2001 won 116 games but did not win the WS
 
 		--Doing this will probably result in an unusually small number of wins for a world series champion – determine why this is the case.
