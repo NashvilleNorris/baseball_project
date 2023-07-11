@@ -60,9 +60,23 @@ ORDER BY total_salary_earned DESC
 
 		--Find the player who had the most success stealing bases in 2016, where __success__ is measured as the percentage of stolen base attempts which are successful. (A stolen base attempt results either in a stolen base or being caught stealing.) Consider only players who attempted _at least_ 20 stolen bases.
 	
+SELECT p.namefirst||' '||p.namelast AS player_name, SUM(b.sb+b.cs) AS total_attempts, ROUND((SUM(sb)::numeric / NULLIF(SUM(sb+cs), 0)) * 100, 2)||'%' AS success_rate, yearid AS season
+
+FROM batting AS b
+
+JOIN people AS p
+
+USING (playerid)
+
+WHERE yearID = 2016
+
+AND sb + cs >= 20
+
+GROUP BY b.sb,p.namefirst,p.namelast,b.yearid
+
+ORDER BY success_rate DESC;
 
 		--From 1970 – 2016, what is the largest number of wins for a team that did not win the world series? What is the smallest number of wins for a team that did win the world series? Doing this will probably result in an unusually small number of wins for a world series champion – determine why this is the case. Then redo your query, excluding the problem year. How often from 1970 – 2016 was it the case that a team with the most wins also won the world series? What percentage of the time?
-
 
 SELECT teamid AS team, yearid AS season, MAX(w) AS total_wins
 	
