@@ -35,9 +35,28 @@ WHERE p.namelast = 'Gaedel'
 
 
 		--Find all players in the database who played at Vanderbilt University. Create a list showing each player’s first and last names as well as the total salary they earned in the major leagues. Sort this list in descending order by the total salary earned. Which Vanderbilt player earned the most money in the majors?
+SELECT p.namefirst||' '||p.namelast AS player_name, sc.schoolname AS university_attended, SUM(sa.salary)::numeric::money AS total_salary_earned
 
- 
-   
+FROM people AS p
+
+INNER JOIN collegeplaying AS cp
+
+ON p.playerid = cp.playerid
+
+INNER JOIN schools AS sc
+
+ON cp.schoolid = sc.schoolid
+
+INNER JOIN salaries AS sa
+
+ON sa.playerid = p.playerid
+
+WHERE sc.schoolname LIKE '%Vanderbilt%'
+
+GROUP BY p.playerid, p.namefirst, p.namelast, sc.schoolname
+
+ORDER BY total_salary_earned DESC
+
 
 		--Find the player who had the most success stealing bases in 2016, where __success__ is measured as the percentage of stolen base attempts which are successful. (A stolen base attempt results either in a stolen base or being caught stealing.) Consider only players who attempted _at least_ 20 stolen bases.
 	
